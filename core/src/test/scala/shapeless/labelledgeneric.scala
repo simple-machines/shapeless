@@ -135,10 +135,10 @@ object ScalazTaggedAux {
   abstract class TCLowPriority {
     // FIXME: Workaround #309
     implicit def hconsTCTagged[K <: Symbol, H, HT, T <: HList](implicit
-                                                               key: Witness.Aux[K],
-                                                               headTC: Lazy[TC[H @@ HT]],
-                                                               tailTC: TC[T]
-                                                              ): TC[FieldType[K, H @@ HT] :: T] =
+      key: Witness.Aux[K],
+      headTC: Lazy[TC[H @@ HT]],
+      tailTC: TC[T]
+    ): TC[FieldType[K, H @@ HT] :: T] =
       new TC[FieldType[K, H @@ HT] :: T] {
         def apply() = s"${key.value.name}: ${headTC.value()} :: ${tailTC()}"
       }
